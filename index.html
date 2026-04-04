@@ -274,43 +274,57 @@ Disponibles solo en el segundo descanso.
 </div>
 
 <script>
+function abrir(panelId){
+  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+  document.getElementById(panelId).style.display = 'flex';
+  window.scrollTo(0,0);
+}
+
+function cerrar(){
+  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+}
+
+function seleccionarMateria(materia){
+  if(materia){
+    document.getElementById('materiaSeleccionada').value = materia;
+    abrir('formMonitoria');
+  }
+}
+
+function volverMonitorias(){
+  cerrar();
+  abrir('monitorias');
+}
 
 function enviarForm(e){
-e.preventDefault();
+  e.preventDefault();
+  let form = e.target;
+  let data = new FormData(form);
 
-let form = e.target;
-let data = new FormData(form);
-
-fetch("https://formspree.io/f/mgoppzzd", {
-method: "POST",
-body: data,
-headers: {
-'Accept': 'application/json'
+  fetch("https://formspree.io/f/mgoppzzd", {
+    method: "POST",
+    body: data,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if(response.ok){
+      let mensaje = document.getElementById("mensajeExito");
+      mensaje.style.display = "block";
+      setTimeout(() => {
+        mensaje.style.display = "none";
+      }, 3000);
+      form.reset();
+      cerrar();
+    }else{
+      alert("Error al enviar");
+    }
+  })
+  .catch(() => {
+    alert("Error de conexión");
+  });
 }
-})
-.then(response => {
-if(response.ok){
-
-let mensaje = document.getElementById("mensajeExito");
-mensaje.style.display = "block";
-
-setTimeout(() => {
-mensaje.style.display = "none";
-}, 3000);
-
-form.reset();
-
-cerrar();
-
-}else{
-alert("Error al enviar");
-}
-})
-.catch(() => {
-alert("Error de conexión");
-});
-}
-
 </script>
 
 <div id="mensajeExito" style="
