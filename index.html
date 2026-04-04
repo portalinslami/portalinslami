@@ -161,10 +161,16 @@ Solicitar monitoría<br>
 
 <h2>Enviar una denuncia</h2>
 
-<form onsubmit="enviar(event)">
-<textarea placeholder="Describe lo ocurrido" required></textarea>
-<input type="text" placeholder="Nombre y contacto (opcional)">
+<form action="https://formspree.io/f/mgoppzzd" method="POST">
+
+<input type="hidden" name="tipo" value="Denuncia">
+
+<textarea name="mensaje" placeholder="Describe lo ocurrido" required></textarea>
+
+<input type="text" name="contacto" placeholder="Nombre y contacto (opcional)">
+
 <button class="enviar">Enviar denuncia</button>
+
 </form>
 
 </div>
@@ -175,10 +181,16 @@ Solicitar monitoría<br>
 
 <h2>Cuidamos tu salud mental</h2>
 
-<form onsubmit="enviar(event)">
-<textarea placeholder="Escribe lo que sientes" required></textarea>
-<input type="text" placeholder="Nombre y contacto (opcional)">
+<form action="https://formspree.io/f/mgoppzzd" method="POST">
+
+<input type="hidden" name="tipo" value="Salud mental">
+
+<textarea name="mensaje" placeholder="Escribe lo que sientes" required></textarea>
+
+<input type="text" name="contacto" placeholder="Nombre y contacto (opcional)">
+
 <button class="enviar">Enviar mensaje</button>
+
 </form>
 
 <p class="aviso">Busca apoyo en un adulto o docente si lo necesitas.</p>
@@ -191,10 +203,16 @@ Solicitar monitoría<br>
 
 <h2>Quiero proponer una idea</h2>
 
-<form onsubmit="enviar(event)">
-<textarea placeholder="Escribe tu propuesta" required></textarea>
-<input type="text" placeholder="Nombre y contacto (opcional)">
+<form action="https://formspree.io/f/mgoppzzd" method="POST">
+
+<input type="hidden" name="tipo" value="Propuesta">
+
+<textarea name="propuesta" placeholder="Escribe tu propuesta" required></textarea>
+
+<input type="text" name="contacto" placeholder="Nombre y contacto (opcional)">
+
 <button class="enviar">Enviar propuesta</button>
+
 </form>
 
 </div>
@@ -235,17 +253,19 @@ Las monitorías deben solicitarse con al menos dos días de antelación.
 Disponibles solo en el segundo descanso.
 </p>
 
-<form onsubmit="validarMonitoria(event)">
+<form action="https://formspree.io/f/mgoppzzd" method="POST">
 
-<input type="text" id="materiaSeleccionada" readonly>
+<input type="hidden" name="tipo" value="Monitoria">
 
-<textarea placeholder="Tema a reforzar" required></textarea>
+<input type="text" name="materia" id="materiaSeleccionada" readonly>
 
-<input type="number" id="cantidad" placeholder="Mínimo 4 estudiantes" required>
+<textarea name="tema" placeholder="Tema a reforzar" required></textarea>
 
-<input type="text" placeholder="Profesor solicitado" required>
+<input type="number" name="cantidad" placeholder="Mínimo 6 estudiantes" required>
 
-<input type="date" required>
+<input type="text" name="profesor" placeholder="Profesor solicitado" required>
+
+<input type="date" name="fecha" required>
 
 <button class="enviar">Enviar solicitud</button>
 
