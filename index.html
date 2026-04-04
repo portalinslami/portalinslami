@@ -33,7 +33,7 @@ display:flex;
 flex-direction:column;
 gap:15px;
 width:90%;
-max-width:320px;
+max-width:350px;
 }
 
 .menu button{
@@ -47,15 +47,15 @@ cursor:pointer;
 }
 
 @keyframes vibrar {
-  0% { transform: translate(0); }
-  25% { transform: translate(-2px, 2px); }
-  50% { transform: translate(2px, -2px); }
-  75% { transform: translate(-2px, -2px); }
-  100% { transform: translate(0); }
+0% { transform: translate(0); }
+25% { transform: translate(-2px, 2px); }
+50% { transform: translate(2px, -2px); }
+75% { transform: translate(-2px, -2px); }
+100% { transform: translate(0); }
 }
 
 .menu button:hover {
-  animation: vibrar 0.4s;
+animation: vibrar 0.4s;
 }
 
 /* PANEL */
@@ -70,14 +70,13 @@ color:black;
 display:none;
 flex-direction:column;
 align-items:center;
-justify-content:center;
-padding:20px;
-z-index:1000;
+justify-content:flex-start;
+padding:80px 20px 20px;
 overflow:auto;
-position:fixed;
+z-index:1000;
 }
 
-/* BOTON VOLVER ARRIBA */
+/* BOTON VOLVER */
 .boton-volver-top{
 position:absolute;
 top:15px;
@@ -96,7 +95,7 @@ font-weight:600;
 /* TITULOS */
 .panel h2{
 font-size:26px;
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
 /* FORM */
@@ -105,11 +104,11 @@ display:flex;
 flex-direction:column;
 align-items:center;
 width:100%;
+max-width:500px;
 }
 
 textarea, input, select{
-width:90%;
-max-width:420px;
+width:100%;
 padding:14px;
 margin:10px 0;
 border-radius:10px;
@@ -130,19 +129,58 @@ border:none;
 border-radius:10px;
 cursor:pointer;
 font-size:16px;
-width:200px;
+width:100%;
+max-width:250px;
 }
 
 /* AVISOS */
 .aviso{
 font-size:15px;
 color:#444;
-max-width:420px;
+max-width:500px;
 margin-bottom:12px;
 }
 
-small{
-font-size:13px;
+/* 📱 CELULARES */
+@media(max-width:600px){
+
+h1{
+font-size:28px;
+}
+
+.menu{
+width:95%;
+}
+
+.menu button{
+font-size:16px;
+padding:16px;
+}
+
+.panel{
+padding:70px 15px 20px;
+}
+
+.panel h2{
+font-size:22px;
+}
+
+}
+
+/* 💻 COMPUTADORES */
+@media(min-width:768px){
+
+.menu{
+flex-direction:row;
+flex-wrap:wrap;
+justify-content:center;
+max-width:700px;
+}
+
+.menu button{
+width:250px;
+}
+
 }
 
 </style>
@@ -164,9 +202,7 @@ Solicitar monitoría<br>
 
 <!-- DENUNCIA -->
 <div id="denuncia" class="panel">
-
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
-
 <h2>Enviar una denuncia</h2>
 
 <form onsubmit="enviar(event)">
@@ -174,14 +210,11 @@ Solicitar monitoría<br>
 <input type="text" placeholder="Nombre y contacto (opcional)">
 <button class="enviar">Enviar denuncia</button>
 </form>
-
 </div>
 
 <!-- SALUD -->
 <div id="salud" class="panel">
-
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
-
 <h2>Cuidamos tu salud mental</h2>
 
 <form onsubmit="enviar(event)">
@@ -191,14 +224,11 @@ Solicitar monitoría<br>
 </form>
 
 <p class="aviso">Busca apoyo en un adulto o docente si lo necesitas.</p>
-
 </div>
 
 <!-- PROPUESTA -->
 <div id="propuesta" class="panel">
-
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
-
 <h2>Quiero proponer una idea</h2>
 
 <form onsubmit="enviar(event)">
@@ -206,12 +236,10 @@ Solicitar monitoría<br>
 <input type="text" placeholder="Nombre y contacto (opcional)">
 <button class="enviar">Enviar propuesta</button>
 </form>
-
 </div>
 
 <!-- MONITORIAS -->
 <div id="monitorias" class="panel">
-
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
 
 <h2>Solicitar monitoría</h2>
@@ -234,7 +262,6 @@ Las monitorías deben solicitarse con al menos dos días de antelación.
 
 <!-- FORM MONITORIA -->
 <div id="formMonitoria" class="panel">
-
 <button class="boton-volver-top" onclick="volverMonitorias()">← Volver</button>
 
 <h2>Solicitud de monitoría</h2>
@@ -262,7 +289,6 @@ Disponibles solo en el segundo descanso.
 <button class="enviar">Enviar solicitud</button>
 
 </form>
-
 </div>
 
 <script>
@@ -312,4 +338,3 @@ cerrar();
 
 </body>
 </html>
-
