@@ -161,7 +161,7 @@ Solicitar monitoría<br>
 
 <h2>Enviar una denuncia</h2>
 
-<form action="https://formspree.io/f/mgoppzzd" method="POST">
+<form onsubmit="enviarForm(event)">
 
 <input type="hidden" name="tipo" value="Denuncia">
 
@@ -181,7 +181,7 @@ Solicitar monitoría<br>
 
 <h2>Cuidamos tu salud mental</h2>
 
-<form action="https://formspree.io/f/mgoppzzd" method="POST">
+<form onsubmit="enviarForm(event)">
 
 <input type="hidden" name="tipo" value="Salud mental">
 
@@ -203,7 +203,7 @@ Solicitar monitoría<br>
 
 <h2>Quiero proponer una idea</h2>
 
-<form action="https://formspree.io/f/mgoppzzd" method="POST">
+<form onsubmit="enviarForm(event)">
 
 <input type="hidden" name="tipo" value="Propuesta">
 
@@ -253,7 +253,7 @@ Las monitorías deben solicitarse con al menos dos días de antelación.
 Disponibles solo en el segundo descanso.
 </p>
 
-<form action="https://formspree.io/f/mgoppzzd" method="POST">
+<form onsubmit="enviarForm(event)">
 
 <input type="hidden" name="tipo" value="Monitoria">
 
@@ -275,48 +275,61 @@ Disponibles solo en el segundo descanso.
 
 <script>
 
-function abrir(id){
-document.getElementById(id).style.display="flex";
-}
-
-function cerrar(){
-document.querySelectorAll(".panel").forEach(p=>p.style.display="none");
-}
-
-function seleccionarMateria(materia){
-if(materia==="") return;
-
-cerrar();
-document.getElementById("formMonitoria").style.display="flex";
-document.getElementById("materiaSeleccionada").value=materia;
-}
-
-function volverMonitorias(){
-cerrar();
-document.getElementById("monitorias").style.display="flex";
-}
-
-function validarMonitoria(e){
+function enviarForm(e){
 e.preventDefault();
 
-let cantidad=document.getElementById("cantidad").value;
+let form = e.target;
+let data = new FormData(form);
 
-if(cantidad < 6){
-alert("Mínimo 6 estudiantes");
-return;
+fetch("https://formspree.io/f/mgoppzzd", {
+method: "POST",
+body: data,
+headers: {
+'Accept': 'application/json'
 }
+})
+.then(response => {
+if(response.ok){
 
-alert("Solicitud enviada correctamente");
+let mensaje = document.getElementById("mensajeExito");
+mensaje.style.display = "block";
+
+setTimeout(() => {
+mensaje.style.display = "none";
+}, 3000);
+
+form.reset();
+
 cerrar();
+
+}else{
+alert("Error al enviar");
 }
-
-function enviar(e){
-e.preventDefault();
-alert("Enviado correctamente");
-cerrar();
+})
+.catch(() => {
+alert("Error de conexión");
+});
 }
 
 </script>
 
+<div id="mensajeExito" style="
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+background:#0d47a1;
+color:white;
+padding:15px 25px;
+border-radius:10px;
+display:none;
+z-index:3000;
+font-weight:600;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+">
+✅ Enviado correctamente
+</div>
+
 </body>
 </html>
+
