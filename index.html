@@ -11,19 +11,14 @@ body{
 margin:0;
 font-family:'Segoe UI', sans-serif;
 color:white;
-background:linear-gradient(rgba(13,71,161,0.85), rgba(13,71,161,0.85)), url("fondo.jpg");
-background-size:cover;
-}
-
-/* CONTENEDOR PRINCIPAL */
-.container{
+text-align:center;
 min-height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:20px;
-text-align:center;
+background:linear-gradient(rgba(13,71,161,0.85), rgba(13,71,161,0.85)), url("fondo.jpg");
+background-size:cover;
 }
 
 /* TITULO */
@@ -37,8 +32,8 @@ margin-bottom:30px;
 display:flex;
 flex-direction:column;
 gap:15px;
-width:100%;
-max-width:400px;
+width:90%;
+max-width:350px;
 }
 
 .menu button{
@@ -49,7 +44,6 @@ border-radius:12px;
 font-size:18px;
 font-weight:600;
 cursor:pointer;
-width:100%;
 }
 
 /* PANEL */
@@ -64,20 +58,15 @@ color:black;
 display:none;
 flex-direction:column;
 align-items:center;
-overflow-y:auto;
+justify-content:flex-start;
+padding:80px 20px 20px;
+overflow:auto;
 z-index:1000;
-padding:70px 20px 40px;
-}
-
-/* CONTENIDO INTERNO PANEL */
-.panel-content{
-width:100%;
-max-width:500px;
 }
 
 /* BOTON VOLVER */
 .boton-volver-top{
-position:fixed;
+position:absolute;
 top:15px;
 left:15px;
 background:white;
@@ -89,13 +78,12 @@ font-size:16px;
 color:#0d47a1;
 cursor:pointer;
 font-weight:600;
-z-index:2000;
 }
 
 /* TITULOS */
 .panel h2{
 font-size:26px;
-margin-bottom:15px;
+margin-bottom:10px;
 }
 
 /* FORM */
@@ -104,6 +92,7 @@ display:flex;
 flex-direction:column;
 align-items:center;
 width:100%;
+max-width:500px;
 }
 
 textarea, input, select{
@@ -129,39 +118,76 @@ border-radius:10px;
 cursor:pointer;
 font-size:16px;
 width:100%;
+max-width:250px;
 }
 
 /* AVISOS */
 .aviso{
 font-size:15px;
 color:#444;
+max-width:500px;
 margin-bottom:12px;
 }
 
-/* 📱 CELULAR */
+/* 🔥 RESPONSIVE PARA CELULARES */
 @media(max-width:600px){
-h1{font-size:28px;}
+
+h1{
+font-size:28px;
 }
 
-/* 💻 PC */
+.menu{
+width:95%;
+}
+
+.menu button{
+font-size:16px;
+padding:16px;
+}
+
+.panel{
+padding:70px 15px 20px;
+}
+
+.panel h2{
+font-size:22px;
+}
+
+textarea, input, select{
+font-size:15px;
+padding:12px;
+}
+
+button.enviar{
+font-size:15px;
+}
+
+}
+
+/* 🔥 MEJORA PARA COMPUTADOR */
 @media(min-width:768px){
+
 .menu{
 flex-direction:row;
 flex-wrap:wrap;
 justify-content:center;
+max-width:600px;
 }
 
 .menu button{
-width:45%;
+width:250px;
 }
+
+.panel{
+align-items:center;
+}
+
 }
 
 </style>
 </head>
 
 <body>
-
-<div class="container">
 
 <h1>Portal de Voz Estudiantil<br>INSLAMI</h1>
 
@@ -175,13 +201,9 @@ Solicitar monitoría<br>
 </button>
 </div>
 
-</div>
-
 <!-- DENUNCIA -->
 <div id="denuncia" class="panel">
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
-
-<div class="panel-content">
 <h2>Enviar una denuncia</h2>
 
 <form onsubmit="enviar(event)">
@@ -190,13 +212,10 @@ Solicitar monitoría<br>
 <button class="enviar">Enviar denuncia</button>
 </form>
 </div>
-</div>
 
 <!-- SALUD -->
 <div id="salud" class="panel">
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
-
-<div class="panel-content">
 <h2>Cuidamos tu salud mental</h2>
 
 <form onsubmit="enviar(event)">
@@ -207,13 +226,10 @@ Solicitar monitoría<br>
 
 <p class="aviso">Busca apoyo en un adulto o docente si lo necesitas.</p>
 </div>
-</div>
 
 <!-- PROPUESTA -->
 <div id="propuesta" class="panel">
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
-
-<div class="panel-content">
 <h2>Quiero proponer una idea</h2>
 
 <form onsubmit="enviar(event)">
@@ -222,13 +238,11 @@ Solicitar monitoría<br>
 <button class="enviar">Enviar propuesta</button>
 </form>
 </div>
-</div>
 
 <!-- MONITORIAS -->
 <div id="monitorias" class="panel">
 <button class="boton-volver-top" onclick="cerrar()">← Volver</button>
 
-<div class="panel-content">
 <h2>Solicitar monitoría</h2>
 
 <p class="aviso">
@@ -244,14 +258,13 @@ Las monitorías deben solicitarse con al menos dos días de antelación.
 <option>Biología</option>
 <option>Inglés</option>
 </select>
-</div>
+
 </div>
 
 <!-- FORM MONITORIA -->
 <div id="formMonitoria" class="panel">
 <button class="boton-volver-top" onclick="volverMonitorias()">← Volver</button>
 
-<div class="panel-content">
 <h2>Solicitud de monitoría</h2>
 
 <p class="aviso">Solicitar con al menos 2 días de anticipación.</p>
@@ -273,7 +286,6 @@ Las monitorías deben solicitarse con al menos dos días de antelación.
 
 </form>
 </div>
-</div>
 
 <script>
 
@@ -287,7 +299,6 @@ document.querySelectorAll(".panel").forEach(p=>p.style.display="none");
 
 function seleccionarMateria(materia){
 if(materia==="") return;
-
 cerrar();
 document.getElementById("formMonitoria").style.display="flex";
 document.getElementById("materiaSeleccionada").value=materia;
@@ -323,7 +334,4 @@ cerrar();
 </body>
 </html>
 
-</script>
 
-</body>
-</html>
