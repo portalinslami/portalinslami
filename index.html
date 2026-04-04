@@ -11,116 +11,107 @@ body{
 margin:0;
 font-family:'Segoe UI', sans-serif;
 color:white;
-text-align:center;
-min-height:100vh;
-background:linear-gradient(rgba(13,71,161,0.85), rgba(13,71,161,0.85)), url("fondo.jpg");
+background:linear-gradient(rgba(13,71,161,0.8), rgba(13,71,161,0.8)), url("fondo.jpg");
 background-size:cover;
+background-position:center;
 }
 
-/* TITULO */
+.container{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+.card{
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(10px);
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+width:100%;
+max-width:400px;
+}
+
 h1{
-font-size:40px;
-margin-bottom:30px;
+font-size:32px;
+margin-bottom:25px;
 }
 
-/* MENU */
 .menu{
 display:flex;
 flex-direction:column;
 gap:15px;
-width:90%;
-max-width:320px;
-margin:auto;
-margin-top:40px;
 }
 
 .menu button{
 background:#FFD600;
 border:none;
-padding:18px;
+padding:16px;
 border-radius:12px;
-font-size:18px;
+font-size:16px;
 font-weight:600;
 cursor:pointer;
+transition:all 0.3s ease;
 }
 
-@keyframes vibrar {
-  0% { transform: translate(0); }
-  25% { transform: translate(-2px, 2px); }
-  50% { transform: translate(2px, -2px); }
-  75% { transform: translate(-2px, -2px); }
-  100% { transform: translate(0); }
+.menu button:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
 
-.menu button:hover {
-  animation: vibrar 0.4s;
-}
-
-/* PANEL */
 .panel{
 position:fixed;
 top:0;
 left:0;
 width:100%;
-height:100%;
+height:100vh;
 background:white;
 color:black;
 display:none;
 flex-direction:column;
 align-items:center;
-justify-content:center;
-padding:20px;
+overflow-y:auto;
+padding:80px 20px 80px;
 z-index:1000;
-overflow:auto;
-position:fixed;
 }
 
-/* BOTON VOLVER ARRIBA */
 .boton-volver-top{
 position:fixed;
-z-index:2000;
 top:15px;
 left:15px;
 background:white;
-padding:6px 12px;
-border-radius:8px;
-box-shadow:0 2px 8px rgba(0,0,0,0.2);
+padding:8px 14px;
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
 border:none;
-font-size:16px;
+font-size:14px;
 color:#0d47a1;
 cursor:pointer;
 font-weight:600;
 }
 
-/* TITULOS */
 .panel h2{
-font-size:26px;
+font-size:24px;
 margin-bottom:15px;
 }
-
-/* FORM */
 form{
 display:flex;
 flex-direction:column;
 align-items:center;
 width:100%;
+max-width:500px;
 }
-
 textarea, input, select{
-width:90%;
-max-width:420px;
+width:100%;
 padding:14px;
 margin:10px 0;
 border-radius:10px;
 border:1px solid #ccc;
 font-size:16px;
 }
-
-textarea{
-height:130px;
-}
-
-/* BOTON ENVIAR */
 button.enviar{
 background:#0d47a1;
 color:white;
@@ -129,32 +120,32 @@ border:none;
 border-radius:10px;
 cursor:pointer;
 font-size:16px;
-width:200px;
-
-/* 🔥 ESTA LÍNEA NUEVA */
-margin-bottom:50px;
+width:100%;
+max-width:250px;
+margin-bottom:40px;
 }
-
-/* AVISOS */
 .aviso{
-font-size:15px;
-color:#444;
-max-width:420px;
+font-size:14px;
+color:#555;
 margin-bottom:12px;
 }
-
 small{
-font-size:13px;
+font-size:12px;
 }
+
 
 </style>
 </head>
 
 <body>
 
+<div class="container">
+<div class="card">
+
 <h1>Portal de Voz Estudiantil<br>INSLAMI</h1>
 
 <div class="menu">
+
 <button onclick="abrir('denuncia')">Denuncias</button>
 <button onclick="abrir('salud')">Cuidamos tu salud mental</button>
 <button onclick="abrir('propuesta')">Quiero proponer</button>
@@ -312,5 +303,9 @@ cerrar();
 
 </script>
 
+</div>
+</div>
+
 </body>
 </html>
+
