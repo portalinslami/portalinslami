@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Voz Estudiantil</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+color:white;
+text-align:center;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(rgba(13,71,161,0.85), rgba(13,71,161,0.85)), url("fondo.jpg");
+background-size:cover;
+}
+
+/* TITULO */
+h1{
+font-size:40px;
+margin-bottom:30px;
+}
+
+/* MENU */
+.menu{
+display:flex;
+flex-direction:column;
+gap:15px;
+width:90%;
+max-width:320px;
+}
+
+.menu button{
+background:#FFD600;
+border:none;
+padding:18px;
+border-radius:12px;
+font-size:18px;
+font-weight:600;
+cursor:pointer;
+}
+
+@keyframes vibrar {
+  0% { transform: translate(0); }
+  25% { transform: translate(-2px, 2px); }
+  50% { transform: translate(2px, -2px); }
+  75% { transform: translate(-2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.menu button:hover {
+  animation: vibrar 0.4s;
+}
+
+/* PANEL */
+.panel{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:white;
+color:black;
+display:none;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:1000;
+overflow:auto;
+position:fixed;
+}
+
+/* BOTON VOLVER ARRIBA */
+.boton-volver-top{
+position:absolute;
+top:15px;
+left:15px;
+background:white;
+padding:6px 12px;
+border-radius:8px;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+border:none;
+font-size:16px;
+color:#0d47a1;
+cursor:pointer;
+font-weight:600;
+}
+
+/* TITULOS */
+.panel h2{
+font-size:26px;
+margin-bottom:15px;
+}
+
+/* FORM */
+form{
+display:flex;
+flex-direction:column;
+align-items:center;
+width:100%;
+}
+
+textarea, input, select{
+width:90%;
+max-width:420px;
+padding:14px;
+margin:10px 0;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+textarea{
+height:130px;
+}
+
+/* BOTON ENVIAR */
+button.enviar{
+background:#0d47a1;
+color:white;
+padding:14px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+width:200px;
+}
+
+/* AVISOS */
+.aviso{
+font-size:15px;
+color:#444;
+max-width:420px;
+margin-bottom:12px;
+}
+
+small{
+font-size:13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Portal de Voz Estudiantil<br>INSLAMI</h1>
+
+<div class="menu">
+<button onclick="abrir('denuncia')">Denuncias</button>
+<button onclick="abrir('salud')">Cuidamos tu salud mental</button>
+<button onclick="abrir('propuesta')">Quiero proponer</button>
+<button onclick="abrir('monitorias')">
+Solicitar monitoría<br>
+<small>Solo en semanas de exámenes finales</small>
+</button>
+</div>
+
+<!-- DENUNCIA -->
+<div id="denuncia" class="panel">
+
+<button class="boton-volver-top" onclick="cerrar()">← Volver</button>
+
+<h2>Enviar una denuncia</h2>
+
+<form onsubmit="enviar(event)">
+<textarea placeholder="Describe lo ocurrido" required></textarea>
+<input type="text" placeholder="Nombre y contacto (opcional)">
+<button class="enviar">Enviar denuncia</button>
+</form>
+
+</div>
+
+<!-- SALUD -->
+<div id="salud" class="panel">
+
+<button class="boton-volver-top" onclick="cerrar()">← Volver</button>
+
+<h2>Cuidamos tu salud mental</h2>
+
+<form onsubmit="enviar(event)">
+<textarea placeholder="Escribe lo que sientes" required></textarea>
+<input type="text" placeholder="Nombre y contacto (opcional)">
+<button class="enviar">Enviar mensaje</button>
+</form>
+
+<p class="aviso">Busca apoyo en un adulto o docente si lo necesitas.</p>
+
+</div>
+
+<!-- PROPUESTA -->
+<div id="propuesta" class="panel">
+
+<button class="boton-volver-top" onclick="cerrar()">← Volver</button>
+
+<h2>Quiero proponer una idea</h2>
+
+<form onsubmit="enviar(event)">
+<textarea placeholder="Escribe tu propuesta" required></textarea>
+<input type="text" placeholder="Nombre y contacto (opcional)">
+<button class="enviar">Enviar propuesta</button>
+</form>
+
+</div>
+
+<!-- MONITORIAS -->
+<div id="monitorias" class="panel">
+
+<button class="boton-volver-top" onclick="cerrar()">← Volver</button>
+
+<h2>Solicitar monitoría</h2>
+
+<p class="aviso">
+Las monitorías deben solicitarse con al menos dos días de antelación.
+</p>
+
+<select onchange="seleccionarMateria(this.value)">
+<option value="">Selecciona una materia</option>
+<option>Matemáticas</option>
+<option>Geometría / Estadística</option>
+<option>Química</option>
+<option>Física</option>
+<option>Biología</option>
+<option>Inglés</option>
+</select>
+
+</div>
+
+<!-- FORM MONITORIA -->
+<div id="formMonitoria" class="panel">
+
+<button class="boton-volver-top" onclick="volverMonitorias()">← Volver</button>
+
+<h2>Solicitud de monitoría</h2>
+
+<p class="aviso">
+Las monitorías deben solicitarse con al menos dos días de antelación.
+</p>
+
+<p class="aviso">
+Disponibles solo en el segundo descanso.
+</p>
+
+<form onsubmit="validarMonitoria(event)">
+
+<input type="text" id="materiaSeleccionada" readonly>
+
+<textarea placeholder="Tema a reforzar" required></textarea>
+
+<input type="number" id="cantidad" placeholder="Mínimo 4 estudiantes" required>
+
+<input type="text" placeholder="Profesor solicitado" required>
+
+<input type="date" required>
+
+<button class="enviar">Enviar solicitud</button>
+
+</form>
+
+</div>
+
+<script>
+
+function abrir(id){
+document.getElementById(id).style.display="flex";
+}
+
+function cerrar(){
+document.querySelectorAll(".panel").forEach(p=>p.style.display="none");
+}
+
+function seleccionarMateria(materia){
+if(materia==="") return;
+
+cerrar();
+document.getElementById("formMonitoria").style.display="flex";
+document.getElementById("materiaSeleccionada").value=materia;
+}
+
+function volverMonitorias(){
+cerrar();
+document.getElementById("monitorias").style.display="flex";
+}
+
+function validarMonitoria(e){
+e.preventDefault();
+
+let cantidad=document.getElementById("cantidad").value;
+
+if(cantidad < 6){
+alert("Mínimo 6 estudiantes");
+return;
+}
+
+alert("Solicitud enviada correctamente");
+cerrar();
+}
+
+function enviar(e){
+e.preventDefault();
+alert("Enviado correctamente");
+cerrar();
+}
+
+</script>
+
+</body>
+</html>
+
